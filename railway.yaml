@@ -1,0 +1,8 @@
+# railway.yaml
+
+services:
+  - name: web
+    build:
+      # ...
+    npm:
+      flags: "--omit=dev"
