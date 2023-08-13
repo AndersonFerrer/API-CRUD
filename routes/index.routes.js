@@ -1,7 +1,7 @@
 import { Router } from "express";
 
 const indexRouter = Router()
-indexRouter.get('/', (req, res) => res.send('Hello world 3'))
-indexRouter.get('/api', (req, res) => res.send('Hola api'))
+
+indexRouter.get('/', (req, res) => res.send('Bienvenida a la API de Anderson Ferrer'))
 
 export default indexRouter

@@ -11,10 +11,6 @@ export const connectToDB = async () => {
 };
 
 
-
-
-
-
 /* import { MongoClient, ServerApiVersion } from 'mongodb';
 import { MONGODB_URI } from "../config.js";
 

@@ -1,9 +1,11 @@
 import express from 'express'
 import morgan from 'morgan'
-import router from './routes/product.routes.js'
+
 import indexRouter from './routes/index.routes.js'
 import cors from 'cors'
 import fileUpload from 'express-fileupload'
+import productRouter from './routes/product.routes.js'
+import musicRouter from './routes/musicCard.routes.js'
 
 const app = express()
 
@@ -15,6 +17,7 @@ app.use(fileUpload({
     tempFileDir: './uploads'
 }));
 app.use(indexRouter)
-app.use(router)
+app.use(productRouter)
+app.use(musicRouter)
 
 export default app
