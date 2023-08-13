@@ -19,8 +19,6 @@ export const getProducts = async (req, res) => {
 export const createProducts = async (req, res) => {
     try {
         const { name, description, price, image } = req.body
-        console.log(name, description, price)
-        console.log(req.files)
         const product = new Product({
             name,
             description,
@@ -30,13 +28,16 @@ export const createProducts = async (req, res) => {
             const image = await uploadImage(req.files.image.tempFilePath)
             console.log(image)
             product.image = {
-                public_id: image.public_id,
-                secure_id: image.secure_url
+                "public_id": image.public_id,
+                "secure_url": image.secure_url,
+                "format": image.format,
+                "resource_type": image.resource_type
             }
             await fs.unlink(req.files.image.tempFilePath)
         }
         await product.save()
         res.json(product)
+        console.log('Este es el producto', product)
     } catch (error) {
         return res.status(500).json({ message: error.message })
     }

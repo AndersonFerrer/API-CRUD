@@ -18,7 +18,9 @@ const productScheme = new mongoose.Schema({
     },
     image: {
         public_id: String,
-        secure_url: String
+        secure_url: String,
+        format: String,
+        resource_type: String
     }
 }, { timestamps: true })
 
