@@ -1,6 +1,5 @@
 import musicCardModel from '../models/musicCard.model.js'
-import musicCard from '../models/musicCard.model.js'
-import { uploadImage } from '../utils/cloudinary.js'
+import { deleteFile, uploadImage } from '../utils/cloudinary.js'
 import fs from 'fs-extra'
 
 export const getMusicCards = async (req, res) => {
@@ -54,6 +53,23 @@ export const getMusicCard = async (req, res) => {
         console.log(req.params.id)
         const music = await musicCardModel.findById(req.params.id)
         res.json(music)
+    } catch (error) {
+        return res.status(500).json({ message: error.message })
+    }
+}
+
+export const deleteMusicCard = async (req, res) => {
+    try {
+        const music = await musicCardModel.findByIdAndDelete(req.params.id)
+        if (!music) {
+            return res.status(404).json({
+                message: 'Product does not exist'
+            })
+        }
+        const musicDelete = await deleteFile(music.musica.public_id, "video")
+        const fotoDelete = await deleteFile(music.foto.public_id, "image")
+        console.log(musicDelete, fotoDelete)
+        return res.json(music)
     } catch (error) {
         return res.status(500).json({ message: error.message })
     }

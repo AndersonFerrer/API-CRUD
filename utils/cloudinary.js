@@ -15,9 +15,9 @@ export async function uploadImage(filePath) {
     })
 }
 
-export async function deleteImage(public_id) {
+export async function deleteFile(public_id, typeFile) {
     return await cloudinary.uploader.destroy(public_id, {
-        resource_type: 'auto',
+        resource_type: typeFile,
         folder: 'prueba1'
     });
 }
